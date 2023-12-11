@@ -29,7 +29,6 @@ public abstract class AbstractBaseService<T extends AbstractBaseEntity, ID exten
 	public T update(T entity) {
 		return baseRepository.save(entity);
 	}
-
 	public T updateById(T entity, ID entityId) {
 		Optional<T> optional = baseRepository.findById(entityId);
 		if (optional.isPresent()) {
