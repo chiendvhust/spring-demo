@@ -1,0 +1,6 @@
+spring:
+  redis:
+    standalone:
+      host: ${REDIS_STANDALONE_HOST:127.0.0.1}
+      port: ${REDIS_STANDALONE_PORT:7000}
+    password: ${REDIS_STANDALONE_PASSWORD:Password@123}

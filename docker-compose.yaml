@@ -12,6 +12,14 @@ services:
       - '3309:3306'
     volumes:
       - db:/var/lib/mysql
+  redis-cache:
+    image: redis
+    container_name: redis-cache
+    ports:
+      - "7000:6379"
+    command: redis-server --requirepass "Password@123"
+networks:
+  default:
+    name: spring
 volumes:
   db:
-    driver: local
