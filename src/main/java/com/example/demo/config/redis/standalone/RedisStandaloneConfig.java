@@ -13,19 +13,19 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 @Slf4j
 public class RedisStandaloneConfig {
 
-  @Value("${spring.redis.standalone.host}")
-  private String hostname;
+    @Value("${spring.redis.standalone.host}")
+    private String hostname;
 
-  @Value("${spring.redis.standalone.port}")
-  private Integer port;
+    @Value("${spring.redis.standalone.port}")
+    private Integer port;
 
-  @Value("${spring.redis.password}")
-  private String password;
+    @Value("${spring.redis.password}")
+    private String password;
 
-  @Bean(name = "lettuceConnectionFactory")
-  LettuceConnectionFactory lettuceConnectionFactory() {
-    RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(hostname, port);
-    redisStandaloneConfiguration.setPassword(password);
-    return new LettuceConnectionFactory(redisStandaloneConfiguration);
-  }
+    @Bean(name = "lettuceConnectionFactory")
+    LettuceConnectionFactory lettuceConnectionFactory() {
+        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(hostname, port);
+        redisStandaloneConfiguration.setPassword(password);
+        return new LettuceConnectionFactory(redisStandaloneConfiguration);
+    }
 }
