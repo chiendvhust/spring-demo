@@ -1,11 +1,10 @@
 package com.example.demo.service.lock;
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
@@ -40,7 +39,10 @@ public class DistributedLocker {
                     log.error(e.getMessage(), e);
                     return LockExecutionResult.buildLockAcquiredWithException(e);
                 } finally {
-                    releaseLock(key);
+                    //TO DO: need check
+                    if (Objects.nonNull(lockAcquired) && Boolean.TRUE.equals(lockAcquired)) {
+                        releaseLock(key);
+                    }
                 }
             }, key, howLongShouldLockBeAcquiredSeconds);
         } catch (final Exception e) {
