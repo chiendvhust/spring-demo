@@ -15,8 +15,10 @@ public class DistributedLockService {
 	private static final long DEFAULT_RETRY_TIME = 2000L;
 	private final ValueOperations<String, String> valueOperations;
 
-	public <T> LockExecutionResult<T> lock(final String key, final int howLongShouldLockBeAcquiredSeconds,
-										   final int lockTimeoutSeconds, final Callable<T> task) {
+	public <T> LockExecutionResult<T> lock(final String key,
+										   final int howLongShouldLockBeAcquiredSeconds,
+										   final int lockTimeoutSeconds,
+										   final Callable<T> task) {
 		boolean lockAcquired = tryToGetLock(key, lockTimeoutSeconds, howLongShouldLockBeAcquiredSeconds);
 		if (!lockAcquired) {
 			log.error("Failed to acquire lock for key '{}'", key);
@@ -36,7 +38,8 @@ public class DistributedLockService {
 		}
 	}
 
-	public boolean tryToGetLock(final String lockKey, final int lockTimeoutSeconds,
+	public boolean tryToGetLock(final String lockKey,
+								final int lockTimeoutSeconds,
 								final int howLongShouldLockBeAcquiredSeconds) {
 		final long tryToGetLockTimeout = TimeUnit.SECONDS.toMillis(howLongShouldLockBeAcquiredSeconds);
 

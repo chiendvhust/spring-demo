@@ -1,15 +1,14 @@
 package com.example.demo.service.lock;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public class LockExecutionResult<T> {
 	private final boolean lockAcquired;
 	private final T resultIfLockAcquired;
 	private final Exception exception;
-
-	private LockExecutionResult(boolean lockAcquired, T resultIfLockAcquired, final Exception exception) {
-		this.lockAcquired = lockAcquired;
-		this.resultIfLockAcquired = resultIfLockAcquired;
-		this.exception = exception;
-	}
 
 	public static <T> LockExecutionResult<T> buildLockAcquiredResult(final T result) {
 		return new LockExecutionResult<>(true, result, null);
@@ -21,14 +20,6 @@ public class LockExecutionResult<T> {
 
 	public static <T> LockExecutionResult<T> lockNotAcquired() {
 		return new LockExecutionResult<>(false, null, null);
-	}
-
-	public boolean isLockAcquired() {
-		return lockAcquired;
-	}
-
-	public T getResultIfLockAcquired() {
-		return resultIfLockAcquired;
 	}
 
 	public boolean hasException() {
